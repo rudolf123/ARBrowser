@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">ARBrowser</string>
+    <string name="title_activity_gif">GifActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="splash_screen_description">Vuforia Splash</string>
+    <string name="activities_list_title_string">Vuforia Samples</string>
+    <string name="activities_list_empty">No activities</string>
+
+</resources>

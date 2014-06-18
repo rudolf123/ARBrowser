@@ -1,0 +1,26 @@
+# Blender MTL File: 'mushrooms.blend'
+# Material Count: 2
+
+newmtl mushrooms1
+Ns -0.000015
+Ka 0.000000 0.000000 0.000000
+Kd 0.662826 0.562157 0.444101
+Ks 0.200000 0.200000 0.200000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd prop_mushrooms_001_col.png
+map_Bump prop_mushrooms_001_nor.png
+map_Ks prop_mushrooms_001_ao.png
+
+newmtl mushrooms1_prop_mushrooms_001_sp
+Ns -0.000015
+Ka 0.000000 0.000000 0.000000
+Kd 0.662826 0.562157 0.444101
+Ks 0.200000 0.200000 0.200000
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd prop_mushrooms_001_spec.png
+map_Bump prop_mushrooms_001_nor.png
+map_Ks prop_mushrooms_001_ao.png
