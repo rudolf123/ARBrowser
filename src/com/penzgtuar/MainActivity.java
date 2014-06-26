@@ -78,12 +78,12 @@ public class MainActivity extends RajawaliVuforiaActivity implements
 			break;
 		}
 		
-		if (mRenderer.getSceneManager().getCurrentObject() != null)
-			mRenderer.getSceneManager().getCurrentObject().setScale(mScaleFactor*mRenderer.getSceneManager().getCurrentObject().getInitScale());
-		if (mRenderer.getSceneManager().getCurrentGifObject() != null)
-			mRenderer.getSceneManager().getCurrentGifObject().setScale(mScaleFactor*mRenderer.getSceneManager().getCurrentGifObject().getInitScale());
-		if (mRenderer.getSceneManager().getCurrentVideoObject() != null)
-			mRenderer.getSceneManager().getCurrentVideoObject().setScale(mScaleFactor*mRenderer.getSceneManager().getCurrentVideoObject().getInitScale());
+//		if (mRenderer.getSceneManager().getCurrentObject() != null)
+//			mRenderer.getSceneManager().getCurrentObject().setScale(mScaleFactor*mRenderer.getSceneManager().getCurrentObject().getInitScale());
+//		if (mRenderer.getSceneManager().getCurrentGifObject() != null)
+//			mRenderer.getSceneManager().getCurrentGifObject().setScale(mScaleFactor*mRenderer.getSceneManager().getCurrentGifObject().getInitScale());
+//		if (mRenderer.getSceneManager().getCurrentVideoObject() != null)
+//			mRenderer.getSceneManager().getCurrentVideoObject().setScale(mScaleFactor*mRenderer.getSceneManager().getCurrentVideoObject().getInitScale());
 		return true;
 	}
 

@@ -9,18 +9,14 @@ import rajawali.materials.Material;
 import rajawali.materials.textures.TextureManager;
 import rajawali.materials.textures.ATexture.TextureException;
 import rajawali.materials.textures.VideoTexture;
-import rajawali.math.Quaternion;
-import rajawali.math.vector.Vector3;
 import rajawali.parser.LoaderOBJ;
 
-public class VideoObject {
-    private Object3D mEntity;
-    private double initScale = 1;
+public class VideoObject extends ARObject{
     private VideoTexture mVideoTexture;
     private MediaPlayer mMediaPlayer;
-
     
     public VideoObject(String entname, String videoname, Context mContext, TextureManager mTextureManager){
+    	super(mContext);
     	Resources res = mContext.getResources();
     	int videoID = res.getIdentifier(videoname, "raw", mContext.getPackageName());
     	mMediaPlayer = MediaPlayer.create(mContext,
@@ -49,21 +45,14 @@ public class VideoObject {
 		mMediaPlayer.start();
     }
     
+    @Override
     public void update(){
 		if (mVideoTexture != null) 
 			mVideoTexture.update();
     }
     
-    public void processFoundMarker(Vector3 pos, Quaternion orient){
-    	mEntity.setPosition(pos);
-    	mEntity.setOrientation(orient);
-    	mEntity.setVisible(true);
-    }
-    
     public void processStop(){
     	mEntity.getMaterial().unbindTextures();
-    	mVideoTexture.shouldRecycle(true);
-    	mEntity.setMaterial(null);
     	mMediaPlayer.stop();
 		mMediaPlayer.release();
     }
@@ -74,26 +63,5 @@ public class VideoObject {
 				mMediaPlayer.pause();
 			else if (mMediaPlayer != null)
 				mMediaPlayer.start();
-    }
-    
-    public double getInitScale(){
-    	return initScale;
-    }
-    
-    public void setScale(double scale){
-    	mEntity.setScale(scale);
-    }
-    
-    public void processLostMarker(){
-    	mEntity.setVisible(false);
-    }
-    
-    public Object3D getRajawaliObject(){
-    	return mEntity;
-    }
-    
-    public void setInitScale(double scale){
-    	initScale = scale;
-    	mEntity.setScale(scale);
     }
 }

@@ -10,11 +10,11 @@ import rajawali.math.vector.Vector3;
 import rajawali.scene.RajawaliScene;
 
 public class SceneManager{
-	private HashMap<String, EntityObject> objects = new HashMap<String, EntityObject>();
+//	private HashMap<String, EntityObject> objects = new HashMap<String, EntityObject>();
 	private HashMap<String, GifObject> gifObjects = new HashMap<String, GifObject>();
 	private HashMap<String, VideoObject> videoObjects = new HashMap<String, VideoObject>();
 	private RajawaliScene mCurrentScene;
-	private EntityObject mCurrentObject = null;
+//	private EntityObject mCurrentObject = null;
 	private GifObject mCurrentGifObject = null;
 	private VideoObject mCurrentVideoObject = null;
 	private Context context;
@@ -30,17 +30,17 @@ public class SceneManager{
     	mCurrentScene = scn;
     }
 
-    public EntityObject createObject3DEntity(String name, String meshname){
-    	EntityObject entity = new EntityObject(name, meshname, context, textureManager);
-    	try {
-			mCurrentScene.addChild(entity.getRajawaliObject());
-		} catch (Exception e) {
-	       System.out.print("MyMessage@@@@@@@@@@@@@@@@@" + e.getMessage());
-		}
-		objects.put(name, entity);
-
-    	return entity;
-    }
+//    public EntityObject createObject3DEntity(String name, String meshname){
+//    	EntityObject entity = new EntityObject(name, meshname, context, textureManager);
+//    	try {
+//			mCurrentScene.addChild(entity.getRajawaliObject());
+//		} catch (Exception e) {
+//	       System.out.print("MyMessage@@@@@@@@@@@@@@@@@" + e.getMessage());
+//		}
+//		objects.put(name, entity);
+//
+//    	return entity;
+//    }
     
     public GifObject createGifObject(String name, String gifName){
     	GifObject gifobject = new GifObject(name, gifName, context, textureManager);
@@ -64,9 +64,9 @@ public class SceneManager{
     	return videoobject;
     }
     
-    public EntityObject getCurrentObject(){
-    	return mCurrentObject;
-    }
+//    public EntityObject getCurrentObject(){
+//    	return mCurrentObject;
+//    }
     
     public GifObject getCurrentGifObject(){
     	return mCurrentGifObject;
@@ -76,9 +76,9 @@ public class SceneManager{
     	return mCurrentVideoObject;
     }
     
-    private void setCurrentObject(EntityObject obj){
-    	mCurrentObject = obj;
-    }
+//    private void setCurrentObject(EntityObject obj){
+//    	mCurrentObject = obj;
+//    }
     
     private void setCurrentGifObject(GifObject obj){
     	mCurrentGifObject = obj;
@@ -88,12 +88,12 @@ public class SceneManager{
     	mCurrentVideoObject = obj;
     }
     
-    public EntityObject getObjectByName(String name){
-    	if (objects.get(name) != null)
-    		return objects.get(name);
-    	
-    	return null;
-    }
+//    public EntityObject getObjectByName(String name){
+//    	if (objects.get(name) != null)
+//    		return objects.get(name);
+//    	
+//    	return null;
+//    }
     
     public GifObject getGifObjectByName(String name){
     	if (gifObjects.get(name) != null)
@@ -103,16 +103,16 @@ public class SceneManager{
     }
 
 	public void foundImageMarker(String name, Vector3 pos, Quaternion orient) {
-		if (name.equals("letterg")){
-			EntityObject entity = objects.get(name);
-			if (entity!=null){
-				entity.processFoundMarker(pos, orient);
-		    	setCurrentObject(entity);
-			}
-			else{
-				createObject3DEntity("letterg", "mushrooms_obj").setInitScale(200);
-			}
-		}
+//		if (name.equals("letterg")){
+//			EntityObject entity = objects.get(name);
+//			if (entity!=null){
+//				entity.processFoundMarker(pos, orient);
+//		    	setCurrentObject(entity);
+//			}
+//			else{
+//				createObject3DEntity("letterg", "mushrooms_obj").setInitScale(200);
+//			}
+//		}
 		
 		if(name.equals("letterc"))
 		{
@@ -141,10 +141,10 @@ public class SceneManager{
 	}
 
 	public void noFrameMarkersFound() {
-		if (getCurrentObject() != null){
-			getCurrentObject().getRajawaliObject().setVisible(false);
-			setCurrentObject(null);
-		}
+//		if (getCurrentObject() != null){
+//			getCurrentObject().getRajawaliObject().setVisible(false);
+//			setCurrentObject(null);
+//		}
 		
 		if (getCurrentGifObject() != null){
 			getCurrentGifObject().getRajawaliObject().setVisible(false);

@@ -13,9 +13,9 @@ import rajawali.math.vector.Vector3;
 import rajawali.parser.LoaderOBJ;
 
 public class GifObject {
-    private Object3D mEntity;
-    private double initScale = 1;
     private AnimatedGIFTexture mGifTexture;
+    private Object3D mEntity;
+    private double initScale;
     
     public GifObject(String entname, String gifname, Context mContext, TextureManager mTextureManager){
     	final Material material = new Material();
@@ -53,30 +53,32 @@ public class GifObject {
 		}
     }
     
-    public void processFoundMarker(Vector3 pos, Quaternion orient){
+    protected void processFoundMarker(Vector3 pos, Quaternion orient){
     	mEntity.setPosition(pos);
     	mEntity.setOrientation(orient);
     	mEntity.setVisible(true);
+//    	playSound();
     }
     
-    public double getInitScale(){
-    	return initScale;
-    }
-    
-    public void setScale(double scale){
+    protected void setScale(double scale){
     	mEntity.setScale(scale);
     }
     
-    public void processLostMarker(){
+    protected void processLostMarker(){
     	mEntity.setVisible(false);
+//    	stopSound();
     }
     
-    public Object3D getRajawaliObject(){
+    protected Object3D getRajawaliObject(){
     	return mEntity;
     }
     
-    public void setInitScale(double scale){
+    protected void setInitScale(double scale){
     	initScale = scale;
     	mEntity.setScale(scale);
+    }
+    
+    protected double getInitScale(){
+    	return initScale;
     }
 }
