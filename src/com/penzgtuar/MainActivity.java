@@ -23,51 +23,45 @@ public class MainActivity extends RajawaliVuforiaActivity implements
 	private TextView mDebugLabel;
 	private ScaleGestureDetector mScaleDetector;
 	private float mScaleFactor = 1.f;
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setScreenOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-		useCloudRecognition(false);   
+		useCloudRecognition(false);
 		LinearLayout ll = new LinearLayout(this);
 		ll.setOrientation(LinearLayout.VERTICAL);
 		ll.setGravity(Gravity.CENTER);
-		
+
 		ImageView logoView = new ImageView(this);
 		logoView.setImageResource(R.drawable.rajawali_vuforia);
 		ll.addView(logoView);
-		
-		addContentView(ll, new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+
+		addContentView(ll, new LayoutParams(LayoutParams.MATCH_PARENT,
+				LayoutParams.MATCH_PARENT));
 
 		mScaleDetector = new ScaleGestureDetector(this, new ScaleListener());
-		
+
 		startVuforia();
 	}
 
 	@Override
 	public boolean onTouch(View v, MotionEvent event) {
 		mScaleDetector.onTouchEvent(event);
-		
+
 		switch (event.getAction()) {
 		case MotionEvent.ACTION_DOWN:
-			/*HashMap<String, Integer> map = ((MainRenderer) mRenderer)
-					.getVisibleObjects();
-			if (map.get("formula") == 1) {
-				Intent browserIntent = new Intent(this, GifActivity.class);
-				this.startActivity(browserIntent);
-			}
-			if (map.get("elborlogo") == 1) {
-				Intent browserIntent = new Intent(Intent.ACTION_VIEW,
-						Uri.parse("http://www.electropribor-penza.ru/"));
-				this.startActivity(browserIntent);
-			}
-			if (map.get("mushroom") == 1) {
-				try {
-					mSoungMgr.playTrack("track1.mp3");
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}*/
+			/*
+			 * HashMap<String, Integer> map = ((MainRenderer) mRenderer)
+			 * .getVisibleObjects(); if (map.get("formula") == 1) { Intent
+			 * browserIntent = new Intent(this, GifActivity.class);
+			 * this.startActivity(browserIntent); } if (map.get("elborlogo") ==
+			 * 1) { Intent browserIntent = new Intent(Intent.ACTION_VIEW,
+			 * Uri.parse("http://www.electropribor-penza.ru/"));
+			 * this.startActivity(browserIntent); } if (map.get("mushroom") ==
+			 * 1) { try { mSoungMgr.playTrack("track1.mp3"); } catch
+			 * (IOException e) { e.printStackTrace(); } }
+			 */
 
 			break;
 		case MotionEvent.ACTION_MOVE:
@@ -77,13 +71,17 @@ public class MainActivity extends RajawaliVuforiaActivity implements
 			mDebugLabel.setText("ACTION_UP");
 			break;
 		}
-		
-//		if (mRenderer.getSceneManager().getCurrentObject() != null)
-//			mRenderer.getSceneManager().getCurrentObject().setScale(mScaleFactor*mRenderer.getSceneManager().getCurrentObject().getInitScale());
-//		if (mRenderer.getSceneManager().getCurrentGifObject() != null)
-//			mRenderer.getSceneManager().getCurrentGifObject().setScale(mScaleFactor*mRenderer.getSceneManager().getCurrentGifObject().getInitScale());
-//		if (mRenderer.getSceneManager().getCurrentVideoObject() != null)
-//			mRenderer.getSceneManager().getCurrentVideoObject().setScale(mScaleFactor*mRenderer.getSceneManager().getCurrentVideoObject().getInitScale());
+
+		if (mRenderer.getSceneManager().getCurrentARObject() != null)
+			mRenderer
+					.getSceneManager()
+					.getCurrentARObject()
+					.setScale(
+							mScaleFactor
+									* mRenderer.getSceneManager()
+											.getCurrentARObject()
+											.getInitScale());
+
 		return true;
 	}
 
@@ -105,7 +103,7 @@ public class MainActivity extends RajawaliVuforiaActivity implements
 	@Override
 	protected void initApplicationAR() {
 		super.initApplicationAR();
-		
+
 		createImageMarker("rudolf_pnz_db.xml");
 	}
 
@@ -124,16 +122,17 @@ public class MainActivity extends RajawaliVuforiaActivity implements
 		mUILayout.addContentView(mDebugLabel, new LayoutParams(
 				LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
 	}
-	
-	private class ScaleListener extends ScaleGestureDetector.SimpleOnScaleGestureListener {
+
+	private class ScaleListener extends
+			ScaleGestureDetector.SimpleOnScaleGestureListener {
 		@Override
 		public boolean onScale(ScaleGestureDetector detector) {
-		    mScaleFactor *= detector.getScaleFactor();
-		
-		    // Don't let the object get too small or too large.
-		    mScaleFactor = Math.max(0.1f, Math.min(mScaleFactor, 5.0f));
+			mScaleFactor *= detector.getScaleFactor();
 
-		    return true;
+			// Don't let the object get too small or too large.
+			mScaleFactor = Math.max(0.1f, Math.min(mScaleFactor, 5.0f));
+
+			return true;
 		}
 	}
 }

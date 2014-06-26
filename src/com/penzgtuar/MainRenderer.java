@@ -2,13 +2,12 @@ package com.penzgtuar;
 
 import javax.microedition.khronos.opengles.GL10;
 
-
 import rajawali.math.Quaternion;
 import rajawali.math.vector.Vector3;
 import rajawali.vuforia.RajawaliVuforiaRenderer;
 import android.content.Context;
 
-public class MainRenderer extends RajawaliVuforiaRenderer{
+public class MainRenderer extends RajawaliVuforiaRenderer {
 	private Context context;
 	private SceneManager mSceneMgr = null;
 
@@ -25,13 +24,13 @@ public class MainRenderer extends RajawaliVuforiaRenderer{
 		super.onSurfaceDestroyed();
 		mSceneMgr.onSurfaceDestroyed();
 	}
-	
-	public SceneManager getSceneManager(){
+
+	public SceneManager getSceneManager() {
 		return mSceneMgr;
 	}
-	
+
 	protected void initScene() {
-		mSceneMgr = new SceneManager(context, mTextureManager, getCurrentScene());
+		mSceneMgr = new SceneManager(context, this);
 	}
 
 	@Override

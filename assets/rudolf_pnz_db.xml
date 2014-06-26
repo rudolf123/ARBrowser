@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <QCARConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="qcar_config.xsd">
   <Tracking>
+    <ImageTarget name="letterc" size="200.000000 200.000000" />
+    <ImageTarget name="visitakimov" size="200.000000 109.586464" />
+    <ImageTarget name="pgta" size="200.000000 200.000000" />
+    <ImageTarget name="letterr" size="20.000000 20.000000" />
     <ImageTarget name="formula" size="123.000000 52.659374" />
     <ImageTarget name="elborlogo" size="200.000000 150.000000" />
-    <ImageTarget name="equation" size="200.000000 45.922749" />
-    <ImageTarget name="asdasd" size="200.000000 149.937424" />
-    <ImageTarget name="flash" size="7.000000 14.476000" />
-    <ImageTarget name="letterr" size="20.000000 20.000000" />
-    <ImageTarget name="visitakimov" size="200.000000 109.586464" />
     <ImageTarget name="letterg" size="200.000000 200.000000" />
-    <ImageTarget name="letterc" size="200.000000 200.000000" />
-    <ImageTarget name="pgta" size="200.000000 200.000000" />
+    <ImageTarget name="flash" size="7.000000 14.476000" />
+    <ImageTarget name="asdasd" size="200.000000 149.937424" />
+    <ImageTarget name="equation" size="200.000000 45.922749" />
+    <ImageTarget name="formula_" size="200.000000 200.000000" />
   </Tracking>
 </QCARConfig>
