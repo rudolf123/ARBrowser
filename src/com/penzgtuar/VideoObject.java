@@ -14,6 +14,7 @@ import rajawali.parser.LoaderOBJ;
 public class VideoObject extends ARObject {
 	private VideoTexture mVideoTexture;
 	private MediaPlayer mMediaPlayer;
+	private boolean isVideoDestroed = false;
 
 	public VideoObject(String entname, String videoname, Context mContext,
 			TextureManager mTextureManager) {
@@ -53,8 +54,9 @@ public class VideoObject extends ARObject {
 	}
 
 	public void play() {
-		if (!mMediaPlayer.isPlaying())
-			mMediaPlayer.start();
+		if (mMediaPlayer != null)
+			if (!mMediaPlayer.isPlaying())
+				mMediaPlayer.start();
 	}
 
 	@Override
@@ -64,9 +66,13 @@ public class VideoObject extends ARObject {
 	}
 
 	public void processStop() {
-		mEntity.getMaterial().unbindTextures();
-		mMediaPlayer.stop();
-		mMediaPlayer.release();
+		if (mMediaPlayer != null) {
+			mEntity.getMaterial().unbindTextures();
+			mMediaPlayer.stop();
+			mMediaPlayer.release();
+			mMediaPlayer = null;
+			isVideoDestroed = true;
+		}
 	}
 
 	public void processPause(boolean pause) {

@@ -1,11 +1,17 @@
 package com.penzgtuar;
 
 import com.penzgtuar.penzgtuarbrowser.R;
+import com.qualcomm.vuforia.CameraDevice;
+import com.qualcomm.vuforia.HINT;
+import com.qualcomm.vuforia.Vuforia;
 
 import rajawali.util.RajLog;
 import rajawali.vuforia.RajawaliVuforiaActivity;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
+import android.view.GestureDetector;
 import android.view.Gravity;
 import android.view.ScaleGestureDetector;
 import android.view.View;
@@ -22,6 +28,7 @@ public class MainActivity extends RajawaliVuforiaActivity implements
 	private RajawaliVuforiaActivity mUILayout;
 	private TextView mDebugLabel;
 	private ScaleGestureDetector mScaleDetector;
+	private GestureDetector mGestureDetector;
 	private float mScaleFactor = 1.f;
 
 	@Override
@@ -41,13 +48,17 @@ public class MainActivity extends RajawaliVuforiaActivity implements
 				LayoutParams.MATCH_PARENT));
 
 		mScaleDetector = new ScaleGestureDetector(this, new ScaleListener());
+		mGestureDetector = new GestureDetector(this, new GestureListener());
 
+		
 		startVuforia();
+		
 	}
 
 	@Override
 	public boolean onTouch(View v, MotionEvent event) {
 		mScaleDetector.onTouchEvent(event);
+		mGestureDetector.onTouchEvent(event);
 
 		switch (event.getAction()) {
 		case MotionEvent.ACTION_DOWN:
@@ -64,12 +75,6 @@ public class MainActivity extends RajawaliVuforiaActivity implements
 			 */
 
 			break;
-		case MotionEvent.ACTION_MOVE:
-			mDebugLabel.setText("ACTION_MOVE");
-			break;
-		case MotionEvent.ACTION_UP:
-			mDebugLabel.setText("ACTION_UP");
-			break;
 		}
 
 		if (mRenderer.getSceneManager().getCurrentARObject() != null)
@@ -83,6 +88,14 @@ public class MainActivity extends RajawaliVuforiaActivity implements
 											.getInitScale());
 
 		return true;
+	}
+	
+	@Override	
+	public void onDestroy() {
+		System.out.println("onDestroyActivityOccured "); 
+		if (mRenderer != null)
+			mRenderer.getSceneManager().processVideoThreadStop();
+		super.onDestroy();
 	}
 
 	@Override
@@ -116,7 +129,7 @@ public class MainActivity extends RajawaliVuforiaActivity implements
 		mSurfaceView.setOnTouchListener(this);
 
 		mDebugLabel = new TextView(this);
-		mDebugLabel.setText("DebugMode");
+		mDebugLabel.setText("");
 
 		mUILayout = this;
 		mUILayout.addContentView(mDebugLabel, new LayoutParams(
@@ -135,4 +148,39 @@ public class MainActivity extends RajawaliVuforiaActivity implements
 			return true;
 		}
 	}
+	
+    // Process Single Tap event to trigger autofocus
+    private class GestureListener extends
+        GestureDetector.SimpleOnGestureListener
+    {
+        // Used to set autofocus one second after a manual focus is triggered
+        private final Handler autofocusHandler = new Handler();
+        
+        
+        @Override
+        public boolean onDown(MotionEvent e)
+        {
+            return true;
+        }
+        
+        
+        @Override
+        public boolean onSingleTapUp(MotionEvent e)
+        {
+            // Generates a Handler to trigger autofocus
+            // after 1 second
+//            autofocusHandler.postDelayed(new Runnable()
+//            {
+//                public void run()
+//                {
+//                    boolean result = MainActivity.this.autofocus();
+//                    
+//                    if (!result)
+//                        Log.e("SingleTapUp", "Unable to trigger focus");
+//                }
+//            }, 1000L);
+            
+            return true;
+        }
+    }
 }

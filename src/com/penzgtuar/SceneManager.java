@@ -24,6 +24,7 @@ public class SceneManager {
 	private TextureManager textureManager;
 	private ARObject mCurrentARObject;
 	private RajawaliRenderer mRenderer;
+	private boolean isVideoDestroed = false;
 
 	public SceneManager(Context cntxt, RajawaliRenderer renderer) {
 		context = cntxt;
@@ -141,6 +142,7 @@ public class SceneManager {
 	}
 
 	public void foundImageMarker(String name, Vector3 pos, Quaternion orient) {
+		// System.out.println("Found model: " + name);
 		if (name.equals("letterg")) {
 			MeshObject entity = meshObjects.get(name);
 			if (entity != null) {
@@ -204,9 +206,10 @@ public class SceneManager {
 		}
 	}
 
-	public void onSurfaceDestroyed() {
-		if (mCurrentVideoObject != null)
+	public void processVideoThreadStop() {
+		if (mCurrentVideoObject != null) {
 			mCurrentVideoObject.processStop();
+		}
 	}
 
 	public void OnDrawFrame() {

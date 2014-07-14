@@ -22,7 +22,7 @@ public class MainRenderer extends RajawaliVuforiaRenderer {
 
 	public void onSurfaceDestroyed() {
 		super.onSurfaceDestroyed();
-		mSceneMgr.onSurfaceDestroyed();
+		mSceneMgr.processVideoThreadStop();
 	}
 
 	public SceneManager getSceneManager() {
