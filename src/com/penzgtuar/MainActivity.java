@@ -28,7 +28,6 @@ public class MainActivity extends RajawaliVuforiaActivity implements
 	private RajawaliVuforiaActivity mUILayout;
 	private TextView mDebugLabel;
 	private ScaleGestureDetector mScaleDetector;
-	private GestureDetector mGestureDetector;
 	private float mScaleFactor = 1.f;
 
 	@Override
@@ -48,35 +47,23 @@ public class MainActivity extends RajawaliVuforiaActivity implements
 				LayoutParams.MATCH_PARENT));
 
 		mScaleDetector = new ScaleGestureDetector(this, new ScaleListener());
-		mGestureDetector = new GestureDetector(this, new GestureListener());
 
-		
 		startVuforia();
-		
+
 	}
 
 	@Override
 	public boolean onTouch(View v, MotionEvent event) {
+		super.onTouchEvent(event);
 		mScaleDetector.onTouchEvent(event);
-		mGestureDetector.onTouchEvent(event);
 
 		switch (event.getAction()) {
 		case MotionEvent.ACTION_DOWN:
-			/*
-			 * HashMap<String, Integer> map = ((MainRenderer) mRenderer)
-			 * .getVisibleObjects(); if (map.get("formula") == 1) { Intent
-			 * browserIntent = new Intent(this, GifActivity.class);
-			 * this.startActivity(browserIntent); } if (map.get("elborlogo") ==
-			 * 1) { Intent browserIntent = new Intent(Intent.ACTION_VIEW,
-			 * Uri.parse("http://www.electropribor-penza.ru/"));
-			 * this.startActivity(browserIntent); } if (map.get("mushroom") ==
-			 * 1) { try { mSoungMgr.playTrack("track1.mp3"); } catch
-			 * (IOException e) { e.printStackTrace(); } }
-			 */
-
+			// add action on touch
 			break;
 		}
 
+		// action on
 		if (mRenderer.getSceneManager().getCurrentARObject() != null)
 			mRenderer
 					.getSceneManager()
@@ -89,10 +76,10 @@ public class MainActivity extends RajawaliVuforiaActivity implements
 
 		return true;
 	}
-	
-	@Override	
+
+	@Override
 	public void onDestroy() {
-		System.out.println("onDestroyActivityOccured "); 
+		System.out.println("onDestroyActivityOccured ");
 		if (mRenderer != null)
 			mRenderer.getSceneManager().processVideoThreadStop();
 		super.onDestroy();
@@ -148,39 +135,4 @@ public class MainActivity extends RajawaliVuforiaActivity implements
 			return true;
 		}
 	}
-	
-    // Process Single Tap event to trigger autofocus
-    private class GestureListener extends
-        GestureDetector.SimpleOnGestureListener
-    {
-        // Used to set autofocus one second after a manual focus is triggered
-        private final Handler autofocusHandler = new Handler();
-        
-        
-        @Override
-        public boolean onDown(MotionEvent e)
-        {
-            return true;
-        }
-        
-        
-        @Override
-        public boolean onSingleTapUp(MotionEvent e)
-        {
-            // Generates a Handler to trigger autofocus
-            // after 1 second
-//            autofocusHandler.postDelayed(new Runnable()
-//            {
-//                public void run()
-//                {
-//                    boolean result = MainActivity.this.autofocus();
-//                    
-//                    if (!result)
-//                        Log.e("SingleTapUp", "Unable to trigger focus");
-//                }
-//            }, 1000L);
-            
-            return true;
-        }
-    }
 }
