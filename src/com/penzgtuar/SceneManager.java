@@ -208,7 +208,9 @@ public class SceneManager {
 
 	public void processVideoThreadStop() {
 		if (mCurrentVideoObject != null) {
+			System.out.println("ProcessingStopVideo ");
 			mCurrentVideoObject.processStop();
+			mCurrentVideoObject = null;
 		}
 	}
 

@@ -24,7 +24,7 @@ import android.view.View.OnTouchListener;
 
 public class MainActivity extends RajawaliVuforiaActivity implements
 		OnTouchListener {
-	private MainRenderer mRenderer;
+	private MainRenderer mRenderer = null;
 	private RajawaliVuforiaActivity mUILayout;
 	private TextView mDebugLabel;
 	private ScaleGestureDetector mScaleDetector;
@@ -51,8 +51,24 @@ public class MainActivity extends RajawaliVuforiaActivity implements
 		startVuforia();
 
 	}
-
+	
 	@Override
+	public void onBackPressed() {
+		System.out.println("onBackPressedOccured ");
+		if (mRenderer != null){
+			mRenderer.setSearchingMode(false);
+			mRenderer.getSceneManager().processVideoThreadStop();
+		}
+		super.onBackPressed();
+	}
+	
+	@Override
+	public void onPause (){
+		if (mRenderer != null)
+			mRenderer.getSceneManager().processVideoThreadStop();
+		super.onPause();
+	}
+
 	public boolean onTouch(View v, MotionEvent event) {
 		super.onTouchEvent(event);
 		mScaleDetector.onTouchEvent(event);
@@ -80,8 +96,10 @@ public class MainActivity extends RajawaliVuforiaActivity implements
 	@Override
 	public void onDestroy() {
 		System.out.println("onDestroyActivityOccured ");
-		if (mRenderer != null)
+		if (mRenderer != null){
+			mRenderer.setSearchingMode(false);
 			mRenderer.getSceneManager().processVideoThreadStop();
+		}
 		super.onDestroy();
 	}
 

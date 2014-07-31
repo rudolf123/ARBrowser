@@ -10,6 +10,7 @@ import android.content.Context;
 public class MainRenderer extends RajawaliVuforiaRenderer {
 	private Context context;
 	private SceneManager mSceneMgr = null;
+	private boolean keepSearching  = true;
 
 	public MainRenderer(Context context) {
 		super(context);
@@ -28,6 +29,10 @@ public class MainRenderer extends RajawaliVuforiaRenderer {
 	public SceneManager getSceneManager() {
 		return mSceneMgr;
 	}
+	
+	public void setSearchingMode(boolean search){
+		keepSearching = search;
+	}
 
 	protected void initScene() {
 		mSceneMgr = new SceneManager(context, this);
@@ -41,7 +46,8 @@ public class MainRenderer extends RajawaliVuforiaRenderer {
 	@Override
 	protected void foundImageMarker(String trackableName, Vector3 position,
 			Quaternion orientation) {
-		mSceneMgr.foundImageMarker(trackableName, position, orientation);
+		if (keepSearching)
+			mSceneMgr.foundImageMarker(trackableName, position, orientation);
 	}
 
 	@Override
