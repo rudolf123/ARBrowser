@@ -57,7 +57,7 @@ public class MainActivity extends RajawaliVuforiaActivity implements
 		System.out.println("onBackPressedOccured ");
 		if (mRenderer != null){
 			mRenderer.setSearchingMode(false);
-			mRenderer.getSceneManager().processVideoThreadStop();
+			mRenderer.getSceneManager().processMediaPlayersStop();
 		}
 		super.onBackPressed();
 	}
@@ -65,7 +65,7 @@ public class MainActivity extends RajawaliVuforiaActivity implements
 	@Override
 	public void onPause (){
 		if (mRenderer != null)
-			mRenderer.getSceneManager().processVideoThreadStop();
+			mRenderer.getSceneManager().processMediaPlayersStop();
 		super.onPause();
 	}
 
@@ -98,7 +98,7 @@ public class MainActivity extends RajawaliVuforiaActivity implements
 		System.out.println("onDestroyActivityOccured ");
 		if (mRenderer != null){
 			mRenderer.setSearchingMode(false);
-			mRenderer.getSceneManager().processVideoThreadStop();
+			mRenderer.getSceneManager().processMediaPlayersStop();
 		}
 		super.onDestroy();
 	}

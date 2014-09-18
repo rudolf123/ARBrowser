@@ -68,7 +68,6 @@ public class VideoObject extends ARObject {
 	public void processStop() {
 		if (mMediaPlayer != null) {
 			processPause(true);
-			System.out.println("123 ");
 			mEntity.getMaterial().unbindTextures();
 			mMediaPlayer.stop();
 			mMediaPlayer.release();

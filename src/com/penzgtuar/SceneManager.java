@@ -1,5 +1,6 @@
 package com.penzgtuar;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 import android.content.Context;
@@ -25,12 +26,22 @@ public class SceneManager {
 	private ARObject mCurrentARObject;
 	private RajawaliRenderer mRenderer;
 	private boolean isVideoDestroed = false;
+	private SoundManager mSoundManager;
 
 	public SceneManager(Context cntxt, RajawaliRenderer renderer) {
 		context = cntxt;
 		mRenderer = renderer;
 		textureManager = renderer.getTextureManager();
 		mCurrentScene = renderer.getCurrentScene();
+		mSoundManager = new SoundManager(cntxt, false);
+		
+		try {
+			mSoundManager.addTrack("letterg", "track1.mp3");
+			mSoundManager.addTrack("letterc", "track2.mp3");
+			mSoundManager.addTrack("letterr", "track2.mp3");
+		} catch (IOException e) {
+
+		}
 	}
 
 	public void setCurrentScene(RajawaliScene scn) {
@@ -151,6 +162,7 @@ public class SceneManager {
 			} else {
 				createMeshObject("letterg", "mushrooms_obj").setInitScale(200);
 			}
+			mSoundManager.playTrack("letterg");
 		}
 
 		if (name.equals("formula_")) {
@@ -173,6 +185,7 @@ public class SceneManager {
 				setCurrentVideoObject(createVideoObject("letterc",
 						"sintel_trailer_480p"));
 			}
+			mSoundManager.playTrack("letterc");
 		}
 
 		if (name.equals("letterr")) {
@@ -184,6 +197,7 @@ public class SceneManager {
 				setCurrentAnimatedMeshObject(createAnimatedMeshObject(
 						"letterr", "boblampclean_mesh", "boblampclean_anim"));
 			}
+			mSoundManager.playTrack("letterr");
 		}
 
 	}
@@ -204,9 +218,17 @@ public class SceneManager {
 			getCurrentVideoObject().pause();
 			setCurrentVideoObject(null);
 		}
+
+		mSoundManager.pauseTrack("letterg");
+		mSoundManager.pauseTrack("letterc");
+		mSoundManager.pauseTrack("letterr");
+	}
+	
+	public void processMediaPlayersStop() {
+		processVideoThreadStop();
 	}
 
-	public void processVideoThreadStop() {
+	private void processVideoThreadStop() {
 		if (mCurrentVideoObject != null) {
 			System.out.println("ProcessingStopVideo ");
 			mCurrentVideoObject.processStop();
